@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.parkridejenkins.parkride.entity.Employee;
-import com.parkridejenkins.parkride.exception.ResourceNotFoundException;
+import com.parkridejenkins.parkride.entity.exception.ResourceNotFoundException;
 import com.parkridejenkins.parkride.repository.EmployeeRepository;
 
 import org.springframework.stereotype.Service;
