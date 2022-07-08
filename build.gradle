@@ -6,15 +6,7 @@ plugins {
 	id 'com.palantir.docker-run' version '0.33.0'
 }
 
-group = 'com.parkridejenkins'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-}
+version = scmVersion.version
 
 repositories {
 	mavenCentral()
@@ -48,3 +40,7 @@ dockerRun {
     ports  '8080:8080'
     clean true
 }
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
