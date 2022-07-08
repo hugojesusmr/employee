@@ -1,8 +1,8 @@
-package com.employee.parkride.service;
+package com.employee.service;
 
 import java.util.List;
 
-import com.employee.parkride.entity.Employee;
+import com.employee.entity.Employee;
 
 public interface EmployeeService {
     public List<Employee> listAllEmployee();

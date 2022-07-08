@@ -1,4 +1,4 @@
-package com.employee.parkride.entity.exception;
+package com.employee.entity.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

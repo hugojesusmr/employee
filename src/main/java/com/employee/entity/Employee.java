@@ -1,4 +1,4 @@
-package com.employee.parkride.entity;
+package com.employee.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
