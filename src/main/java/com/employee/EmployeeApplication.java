@@ -1,11 +1,11 @@
-package com.parkridejenkins.parkride;
-import com.parkridejenkins.parkride.entity.Employee;
-import com.parkridejenkins.parkride.repository.EmployeeRepository;
-
+package com.employee.parkride;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import com.employee.parkride.entity.Employee;
+import com.employee.parkride.repository.EmployeeRepository;
 
 @SpringBootApplication
 public class EmployeeApplication{

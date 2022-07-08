@@ -1,13 +1,13 @@
-package com.parkridejenkins.parkride.service;
+package com.employee.parkride.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.parkridejenkins.parkride.entity.Employee;
-import com.parkridejenkins.parkride.entity.exception.ResourceNotFoundException;
-import com.parkridejenkins.parkride.repository.EmployeeRepository;
-
 import org.springframework.stereotype.Service;
+
+import com.employee.parkride.entity.Employee;
+import com.employee.parkride.entity.exception.ResourceNotFoundException;
+import com.employee.parkride.repository.EmployeeRepository;
 
 import lombok.RequiredArgsConstructor;
 

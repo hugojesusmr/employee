@@ -6,7 +6,15 @@ plugins {
 	id 'com.palantir.docker-run' version '0.33.0'
 }
 
-version = scmVersion.version
+group = 'com.parkridejenkins'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
@@ -17,7 +25,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation "org.springdoc:springdoc-openapi-ui:1.6.4"
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -27,7 +35,7 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-String imageName = "hugojesusmr/themeparkride:$version"
+String imageName = "hugojesusmr/employee:$version"
 
 docker {
     name imageName
@@ -40,8 +48,4 @@ dockerRun {
     ports  '8080:8080'
     clean true
 }
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
+

@@ -1,7 +1,4 @@
-package com.parkridejenkins.parkride.controller;
-
-import com.parkridejenkins.parkride.entity.Employee;
-import com.parkridejenkins.parkride.service.EmployeeService;
+package com.employee.parkride.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.employee.parkride.entity.Employee;
+import com.employee.parkride.service.EmployeeService;
 
 import java.util.List;
 
