@@ -6,9 +6,6 @@ plugins {
 	id 'com.palantir.docker-run' version '0.33.0'
 }
 
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '18'
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -47,4 +44,8 @@ dockerRun {
     ports  '8080:8080'
     clean true
 }
-
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(18)
+	}
+}
