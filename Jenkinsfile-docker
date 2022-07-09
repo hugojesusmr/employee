@@ -20,7 +20,7 @@ pipeline{
                 }
             }
             stage('Push Docker image'){
-                enviroment{
+                environment{
                     DOCKER_HUB_LOGIN = credentials('docker-hub')
                 }
                 steps{
