@@ -15,17 +15,17 @@ pipeline{
             }
         }
         stage('Build Docker image'){
-            steps{
-                sh './gradlew docker'
+                steps{
+                    sh './gradlew docker'
+                }
+            }
+            stage('Push Docker image'){
+                enviroment{
+                    DOCKER_HUB_LOGIN = credentials('docker-hub')
+                }
+                steps{
+                    sh './gradlew dockerPush'
+                }
             }
         }
-        stage('Push Docker image'){
-            enviroment{
-                DOCKER_HUB_LOGIN = credentials('docker-hub')
-            }
-            s teps{
-                sh './gradlew dockerPush'
-            }
-        }
-    }
 }
