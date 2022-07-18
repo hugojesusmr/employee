@@ -45,6 +45,19 @@ dockerRun {
     ports  '8080:8080'
     clean true
 }
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			limit {
+				minimum = 0.2
+			}
+		}
+	}
+}
+
+checkstyle {
+	checkstyleTest.enabled = true
+}
 
 java {
 	toolchain {
