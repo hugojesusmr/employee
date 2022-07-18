@@ -1,21 +1,20 @@
-pipeline{
+pipeline {
     agent any
-    triggers{
-        pollSCM '* * * * *'
+    triggers {
+        pollSCM('* * * * *')
     }
-    stages{
-        stage('Build'){
-            steps{
-                sh './gradlew assemble'
+    stages {
+        stage("Compile") {
+            steps {
+                sh "./gradlew compileJava"
             }
         }
-        stage('Test'){
-            steps{
-                sh './gradlew test'
+        stage("Unit test") {
+            steps {
+                sh "./gradlew test"
             }
         }
-    }
-    stage("Code coverage") {
+        stage("Code coverage") {
             steps {
         	    sh "./gradlew jacocoTestReport"
         	 	publishHTML (target: [
@@ -33,4 +32,5 @@ pipeline{
                 }
             }
         }
+    }
 }
