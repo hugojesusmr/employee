@@ -45,16 +45,22 @@ dockerRun {
     ports  '8080:8080'
     clean true
 }
-jacocoTestCoverageVerification {
-	violationRules {
-		rule {
-			limit {
-				minimum = 0.2
-			}
-		}
-	}
+test {
+  testLogging {
+    exceptionFormat = 'full'
+    events = ["passed", "failed", "skipped"]
+  }
+  finalizedBy jacocoTestReport
 }
 
+jacocoTestReport{
+  group = "build"
+  reports {
+    xml.enabled false
+    csv.enabled false
+    html.destination file("${buildDir}/jacocoHtml")
+  }
+}
 checkstyle {
 	checkstyleTest.enabled = true
 }
