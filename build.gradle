@@ -11,6 +11,7 @@ plugins {
 }
 
 repositories {
+	 jcenter()
 	mavenCentral()
 }
 
@@ -47,6 +48,21 @@ dockerRun {
 }
 
 
+checkstyle {
+    config = rootProject.resources.text.fromFile('buildConfig/checkstyle/checkstyle.xml')
+    toolVersion = '8.11'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.enabled true
+    }
+
+    
+}
+
 jacocoTestCoverageVerification {
     violationRules {
         rule {
@@ -59,7 +75,11 @@ jacocoTestCoverageVerification {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.1"
+}
 
+// to run coverage verification during the build (and fail when appropriate)
 check.dependsOn jacocoTestCoverageVerification
 java {
 	toolchain {
