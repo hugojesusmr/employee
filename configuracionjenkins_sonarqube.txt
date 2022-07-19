@@ -1,0 +1,62 @@
+Pasos resumidos:
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Máquinas Docker:
+
+Jenkins:
+ docker run -p 20000:8080 -p 50000:50000 -v c:\jenkins\jenkins_home:/var/jenkins --name jenkinsSonarQubePruebas jenkins/jenkins:latest
+
+SonarQube:
+  docker run -d --name sonarQubePruebas -p 9000:9000 sonarqube
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Plugins de Jenkins:
+  · JaCoCo: Es un code coverage fácilmente integrable 
+      con proyectos basados en Java. 
+  · HTML Publisher: Herramienta necesaria para mostrar los resultados de JaCoCo. 
+ · SonarQube Scanner: Herramienta que junta lo mejor de los 
+         code coverage y los static code analysis.
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Configuración en Jenkins:
+  Administrar Jenkins.  Configurar el Sistema.  SonarQube servers:
+
+  · Presionar "Enable injection of SonarQube".
+  · Name: SonarQubePruebas 
+  · URL del servidor: http://sonarQubePruebas:9000
+  
+  Administrar Jenkins.  Global Tool Configuration.  SonarQube Scanner
+   
+  · Name: SonarQubePruebas
+  · Presionar "Instalar automáticamente".
+
+Advertencia: 
+  · En los "Name", los nombres tienen que coincidir entre si
+     y también con el especificado en el Jenkinsfile del proyecto.
+  · En la URL del servidor, en vez de localhost, escribimos el nombre
+    de la máquina en Docker.
+ 
+
+Si no nos acordamos de las máquinas Docker:
+  · Saber las máquinas activas. 
+   docker ps
+  · Saber los contenedores que tenemos.
+   docker ps -a 
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Configurar la red del servidor de Docker.
+
+  · Creamos la red interna:
+    docker network create red_jenkins_sonarqube
+
+  · Añadimos a nuestra red interna Jenkins y SonarQube:
+    docker network connect red_jenkins_sonarqube jenkinsSonarQubePruebas
+   docker network connect red_jenkins_sonarqube sonarQubePruebas
+
+  · Borrar red interna:
+   docker network rm red_jenkins_sonarqube
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+Configuramos un pipeline.
+  · Definition: Pipeline script from SCM
+  · SCM: Git
+  · Repository URL: https://github.com/juanmaMacGyverCode...
+📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜📜
+
+Si os ha gustado dadle a like, suscribíos si queréis para seguirme y compartirlo si alguien lo necesita. Saludos y que la gracia matemática de Gauss esté contigo.
