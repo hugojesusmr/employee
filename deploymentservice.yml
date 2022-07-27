@@ -15,12 +15,17 @@ spec:
         app: spring-boot-k8s
     spec:
       containers:
-        - name: spring-boot-k8s
-          image: hugojesusmr/employee # Image that will be used to containers in the cluster
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 4000 # The port that the container is running on in the cluster
-
+        env:
+         - name: HTTP_PROXY
+           value: null
+         - name: HTTPS_PROXY
+            value: null
+         - name: spring-boot-k8s
+           image: hugojesusmr/employee # Image that will be used to containers in the cluster
+           imagePullPolicy: IfNotPresent
+           ports:
+             - containerPort: 4000 # The port that the container is running on in the cluster
+        
 
 ---
 
