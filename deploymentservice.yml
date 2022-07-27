@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: deploymentservice
+  name: spring-boot-k8s-service
   labels:
     app: spring-boot-k8s
 spec:
