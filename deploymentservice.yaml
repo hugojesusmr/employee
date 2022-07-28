@@ -1,26 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment # Kubernetes resource kind we are creating
 metadata:
-  name: spring-boot-employee-k8s-deployment
+  name: springboot-employee-deployment
   labels:
-    app: spring-boot-employee-k8s
+    app: spring-boot-employee
 spec:
   replicas: 2 # Number of replicas that will be created for this deployment
   selector:
     matchLabels:
-      app: spring-boot-employee-k8s
+      app: spring-boot-employee
   template:
     metadata:
       labels:
-        app: spring-boot-employee-k8s
+        app: spring-boot-employee
     spec:
       containers:
-        - name: spring-boot-employee-k8s
-          image: hugojesusmr/employee # Image that will be used to containers in the cluster
+        - name: spring-boot-employee
+          image: hugojesusmr/employee:1.0 # Image that will be used to containers in the cluster
           ports:
             - containerPort: 8082 # The port that the container is running on in the cluster
-
-
 ---
 apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating
@@ -33,4 +31,4 @@ spec:
       targetPort: 8082 # The port exposed by the service
       protocol: TCP
   selector:
-    app: spring-boot-employee-k8s
+    app: spring-boot-employee

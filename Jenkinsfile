@@ -10,7 +10,7 @@ pipeline {
                 sh './gradlew assemble'
             }
         }
-       /*  stage('Test') {
+        stage('Test') {
             steps {
                 sh './gradlew test'
             }
@@ -46,7 +46,7 @@ pipeline {
                 sh 'docker login --username=$DOCKER_HUB_LOGIN_USR --password=$DOCKER_HUB_LOGIN_PSW'
                 sh './gradlew dockerPush'
             }
-        } */
+        } 
            stage('Deploy to k8s'){
             steps{
                 script{
