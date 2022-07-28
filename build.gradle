@@ -2,16 +2,15 @@ plugins {
 	id 'org.springframework.boot' version '2.7.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'jacoco'
+/* 	id 'jacoco'
 	id 'checkstyle'
 	id 'org.sonarqube' version '3.0'
 	id "com.palantir.docker" version "0.33.0"
 	id 'com.palantir.docker-run' version '0.33.0'
-	id 'pl.allegro.tech.build.axion-release' version '1.13.6'
+	id 'pl.allegro.tech.build.axion-release' version '1.13.6' */
 }
 version = 1.0
 repositories {
-	 jcenter()
 	mavenCentral()
 }
 
@@ -34,7 +33,7 @@ tasks.named('test') {
 String dockerHubUsernameProperty = findProperty('dockerHubUsername')?: 'hugojesusmr'
 String imageName = "hugojesusmr/employee:$version"
 
-docker {
+/* docker {
     name imageName
     files "build/libs/${bootJar.archiveFileName.get()}"
     buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
@@ -80,7 +79,7 @@ jacoco {
 }
 
 // to run coverage verification during the build (and fail when appropriate)
-check.dependsOn jacocoTestCoverageVerification
+check.dependsOn jacocoTestCoverageVerification */
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(8)
