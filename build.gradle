@@ -9,7 +9,7 @@ plugins {
 	id 'com.palantir.docker-run' version '0.33.0'
 	id 'pl.allegro.tech.build.axion-release' version '1.13.6'
 }
-
+version = 1.0
 repositories {
 	 jcenter()
 	mavenCentral()
