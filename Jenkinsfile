@@ -15,7 +15,7 @@ pipeline {
                 sh './gradlew test'
             }
         }
-        stage("Code coverage") {
+       /*  stage("Code coverage") {
             steps {
         	    sh "./gradlew jacocoTestReport"
         	 	publishHTML (target: [
@@ -47,12 +47,12 @@ pipeline {
                 sh './gradlew dockerPush'
             }
         } 
-           stage('Deploy to k8s'){
+        stage('Deploy to k8s'){
             steps{
                 script{
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kube')
                 }
             }
-        }
+        } */
     }
 }
