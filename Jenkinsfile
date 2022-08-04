@@ -47,12 +47,23 @@ pipeline {
                 sh './gradlew dockerPush'
             }
         } 
-        stage('Deploy to k8s'){
+       /*  stage('Deploy to k8s'){
             steps{
                 script{
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kube')
                 }
             }
-        } 
+        } */ 
+        stage('ansible playbook'){
+			steps{
+			 	script{
+				    sh '''final_tag=$(echo $Docker_tag | tr -d ' ')
+				     echo ${final_tag}test
+				     sed -i "s/docker_tag/$final_tag/g"  deploymentservice.yaml
+				     '''
+				    ansiblePlaybook become: true, installation: 'ansible', inventory: 'hosts', playbook: 'ansible.yaml'
+				}
+			}
+		}
     }
 }
