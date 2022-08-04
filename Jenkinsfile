@@ -15,7 +15,7 @@ pipeline {
                 sh './gradlew test'
             }
         }
-       /*  stage("Code coverage") {
+        stage("Code coverage") {
             steps {
         	    sh "./gradlew jacocoTestReport"
         	 	publishHTML (target: [
@@ -53,6 +53,6 @@ pipeline {
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kube')
                 }
             }
-        } */
+        } 
     }
 }
