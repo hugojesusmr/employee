@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-mysql-deployment
+  labels:
+    app: db-mysql-employee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-mysql-employee
+  template:
+    metadata:
+      labels:
+        app: db-mysql-employee
+    spec:
+      containers:
+        - name: db-mysql-employee
+          image: mysql
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret #hacer referencia a el nombre del archivo mysql-secret.yml
+                  key: mysql-root-username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret #hacer referencia a el nombre del archivo mysql-secret.yml
+                  key: mysql-root-password
+            - name: MYSQL_DATABASE
+              value: "dbemployee"
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: db-mysql-pvc-employee
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-mysql-employee-service
+  labels:
+    run: db-mysql-employee-service
+spec:
+  selector:
+    app: db-mysql-employee            
+  ports:
+    - port: 3306
+      targetPort: 3306
+      protocol: TCP
+      nodePort: 30201
+  type: NodePort
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-mysql-pvc-products
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 250Mi

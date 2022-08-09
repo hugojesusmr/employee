@@ -17,18 +17,48 @@ spec:
       containers:
         - name: spring-boot-employee
           image: hugojesusmr/employee:1.0 # Image that will be used to containers in the cluster
+          resources:
+            requests:
+              memory: "600Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
           ports:
             - containerPort: 8082 # The port that the container is running on in the cluster
+          env:
+           - name: P_MYSQL_URL
+             valueFrom:
+               configMapKeyRef:
+                 name: mysql-configmap
+                 key: database_url
+           - name: P_MYSQL_USERNAME
+             valueFrom:
+               configMapKeyRef:
+                 name: mysql-configmap
+                 key: database_user
+           - name: P_MYSQL_PASSWORD
+             valueFrom:
+               configMapKeyRef:
+                 name: mysql-configmap-products
+                 key: database_password
+      volumes:
+        - name: mysql-persistence-storage
+          persistentVolumeClaim:
+            claimName: db-mysql-pvc-products  
 ---
 apiVersion: v1 # Kubernetes API version
 kind: Service # Kubernetes resource kind we are creating
 metadata: # Metadata of the resource kind we are creating
   name: springboot-k8-service
+  labels:
+    run: springboot-k8-service
 spec:
   type: NodePort # type of the service.
   ports:
     - port: 8082 # The port that the service is running on in the cluster
       targetPort: 8082 # The port exposed by the service
       protocol: TCP
+      nodePort: 30000
   selector:
     app: spring-boot-employee

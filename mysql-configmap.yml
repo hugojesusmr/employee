@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+data:
+  database_url: jdbc:mysql://db-mysql-employee:3306/dbemployee?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+  database_user: "root"
+  database_password: "123456"

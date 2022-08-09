@@ -3,29 +3,20 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+
 spring:
-  h2:
-    console:
-      enabled: true
   datasource:
-    url: jdbc:h2:mem:themeparkDB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: ${P_MYSQL_URL}
+    username: ${P_MYSQL_USERNAME}
+    password: ${P_MYSQL_PASSWORD}
+
   jpa:
     show-sql: true
-    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
-    database-platform: org.hibernate.dialect.H2Dialect
+      ddl-auto: none
     properties:
       hibernate:
-        show_sql: true
-        use_sql_comments: false
-        format_sql: false
-  sql:
-    init:
-      platform: h2
+        dialect: org.hibernate.dialect.MySQL5Dialect
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
