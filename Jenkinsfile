@@ -10,7 +10,7 @@ pipeline {
                 sh './gradlew assemble'
             }
         }
-        stage('Test') {
+      /*   stage('Test') {
             steps {
                 sh './gradlew test'
             }
@@ -32,7 +32,7 @@ pipeline {
                     sh './gradlew sonarqube'
                 }
             }
-        }
+        } */
         stage('Build Docker image') {
             steps {
                 sh './gradlew docker'
