@@ -50,10 +50,11 @@ pipeline {
         stage('Deploy to k8s'){
             steps{
                 script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kube')
-                    kubernetesDeploy (configs: 'db-deployment.yaml',kubeconfigId: 'kube')
-                    kubernetesDeploy (configs: 'mysql-configmap.yaml',kubeconfigId: 'kube')
-                    kubernetesDeploy (configs: 'mysql-secret.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'k8s/mysql-configmap.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'k8s/mysql-secret.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'k8s/mysql-root-secret.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'k8s/mysql-deployment.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'k8s/backend-deployment.yaml',kubeconfigId: 'kube')
                 }
             }
         }  
