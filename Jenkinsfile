@@ -51,6 +51,9 @@ pipeline {
             steps{
                 script{
                     kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'db-deployment.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'mysql-configmap.yaml',kubeconfigId: 'kube')
+                    kubernetesDeploy (configs: 'mysql-secret.yaml',kubeconfigId: 'kube')
                 }
             }
         }  
