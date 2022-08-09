@@ -43,9 +43,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: db-mysql-employee-service
-  labels:
-    run: db-mysql-employee-service
+  name: mysql-service
 spec:
   selector:
     app: db-mysql-employee            
@@ -60,11 +58,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: db-mysql-pvc-products
+  name: db-mysql-pvc-employee
 spec:
   storageClassName: standard
   accessModes:
     - ReadWriteMany
-  resources:
-    requests:
-      storage: 250Mi

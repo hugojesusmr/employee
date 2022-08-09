@@ -5,7 +5,7 @@ metadata:
   labels:
     app: spring-boot-employee
 spec:
-  replicas: 2 # Number of replicas that will be created for this deployment
+  replicas: 1 # Number of replicas that will be created for this deployment
   selector:
     matchLabels:
       app: spring-boot-employee
@@ -17,13 +17,6 @@ spec:
       containers:
         - name: spring-boot-employee
           image: hugojesusmr/employee:1.0 # Image that will be used to containers in the cluster
-          resources:
-            requests:
-              memory: "600Mi"
-              cpu: "500m"
-            limits:
-              memory: "1Gi"
-              cpu: "1000m"
           ports:
             - containerPort: 8082 # The port that the container is running on in the cluster
           env:
@@ -40,7 +33,7 @@ spec:
            - name: P_MYSQL_PASSWORD
              valueFrom:
                configMapKeyRef:
-                 name: mysql-configmap-products
+                 name: mysql-configmap
                  key: database_password
       volumes:
         - name: mysql-persistence-storage
