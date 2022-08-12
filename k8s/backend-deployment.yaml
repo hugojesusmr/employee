@@ -1,49 +1,6 @@
-apiVersion: apps/v1
-kind: Deployment # Kubernetes resource kind we are creating
-metadata:
-  name: backend
-  labels:
-    app: backend
-spec:
-  replicas: 2 # Number of replicas that will be created for this deployment
-  selector:
-    matchLabels:
-      app: backend
-  template:
-    metadata:
-      labels:
-        app: backend
-    spec:
-      containers:
-        - name: backend
-          image: hugojesusmr/employee:1.0 # Image that will be used to containers in the cluster
-          ports:
-            - containerPort: 8082 # The port that the container is running on in the cluster
-      env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-                name: mysql-configmap
-                key: host        
-        - name: DB_NAME
-          valueFrom:
-            configMapKeyRef:
-                name: mysql-configmap
-                key: name                
-       - name: DB_USERNAME
-          valueFrom:
-            secretMapKeyRef:
-                name: mysql-secret
-                key: username
-       - name: DB_PASSWORD
-          valueFrom:
-            secretMapKeyRef:
-                name: mysql-secret
-                key: password
----
-apiVersion: v1 # Kubernetes API version
-kind: Service # Kubernetes resource kind we are creating
-metadata: # Metadata of the resource kind we are creating
+apiVersion: v1 
+kind: Service
+metadata: 
   name: backend
   labels:
     app: backend
@@ -52,7 +9,51 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 8082 # The port that the service is running on in the cluster
-      targetPort: 8082 # The port exposed by the service
-      nodePort: 30080
-  type: NodePort # type of the service.
+      port: 8080 
+      targetPort: 8080 
+      nodePort: 30163
+  type: NodePort 
+---  
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: hugojesusmr/employee:1.0
+        ports:
+        - containerPort: 8080 
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: host        
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-configmap
+              key: name                
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+
